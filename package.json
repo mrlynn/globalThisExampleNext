@@ -1,0 +1,24 @@
+{
+  "name": "next-mongo-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "mongodb": "^6.3.0",
+    "next": "13.4.12",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.9.0",
+    "@types/react": "^18.2.34",
+    "@types/react-dom": "^18.2.15"
+  }
+}
+
