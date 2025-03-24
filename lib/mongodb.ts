@@ -1,15 +1,19 @@
 // lib/mongodb.ts
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI as string;
-const options = {};
-
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
 if (!process.env.MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
+
+const uri = process.env.MONGODB_URI;
+const options = {
+  maxPoolSize: 10,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+};
+
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
 
 // Use cached connection in dev mode to support HMR
 declare global {
@@ -30,5 +34,10 @@ if (process.env.NODE_ENV === 'development') {
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
+
+// Handle connection errors
+clientPromise.catch((error) => {
+  console.error('MongoDB connection error:', error);
+});
 
 export default clientPromise;
